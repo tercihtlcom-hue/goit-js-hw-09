@@ -10,11 +10,9 @@ let formValues = {
   message: '',
 };
 
-// --- DÜZELTİLEN KISIM: NULL CHECK ---
 try {
   const rawData = localStorage.getItem(STORAGE_KEY);
   
-  // Eğer localStorage içinde veri varsa (null değilse) işlemleri yap
   if (rawData) {
     const savedForm = JSON.parse(rawData);
     
@@ -22,7 +20,6 @@ try {
     email.value = savedForm.email?.trim() || '';
     textarea.value = savedForm.message?.trim() || '';
     
-    // Güncel değerleri formValues objesine de aktar
     formValues = {
       email: email.value,
       message: textarea.value,
@@ -32,7 +29,6 @@ try {
   console.log('Storage parse error name    : ', err.name);
   console.log('Storage parse error message : ', err.message);
 }
-// -------------------------------------
 
 form.addEventListener('input', () => {
   formValues = {
@@ -51,7 +47,6 @@ function handleSubmit(e) {
   const currentEmail = email.value.trim();
   const currentMessage = textarea.value.trim();
 
-  // Validasyon kontrolü
   if (isEmail(currentEmail) && currentMessage !== '') {
     console.log({ email: currentEmail, message: currentMessage });
     
